@@ -361,13 +361,13 @@ ul li {
 }
 
 /* SECTION-8 STYLING */
-.section-8 .img-wraper{
+.section-8 .img-wraper, .section-9 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 4px;
     z-index: 1;
 }
-.section-8 .img-wraper .grid-item{
+.section-8 .img-wraper .grid-item, .section-9 .img-wraper .grid-item{
     width: 100%;
     aspect-ratio: 1.16;
 }
