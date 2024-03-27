@@ -355,6 +355,10 @@ li::marker {
 ul{
     list-style-position: inside;
 }
+ul li {
+    margin-left: 40px;
+    text-indent: -40px;
+}
 
 /* SECTION-8 STYLING */
 .section-8 .img-wraper{
