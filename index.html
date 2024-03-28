@@ -5,36 +5,40 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    
     <title>WT-Capital</title>
 </head>
 <body>
     <section class="section-1 container bg-green">
-        <!-- <div class="container2"> -->
-            <header class="header-1 px-100 pt-107">
-                <img src="./assets/WT-CAPITAL_RGB_LOCKUP_WHITE.png" alt="">
-                <h2 class="text-white text-24">Property Report</h2>
-            </header>
-        <!-- </div> -->
+        <header class="header-1 px-100 pt-107">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_WHITE.png" alt="">
+            <h2 class="text-white text-24">Property Report</h2>
+        </header>
         <div class="w-100 flex justify-end">
-            <div class="divider-gradient"></div>
+        <div class="divider-gradient"></div>
         </div>
-        <!-- <div class="container2"> -->
-            <div class="footer px-100 pb-100">
-                <div class="flex items-center gap-10 mt-80">
-                    <img src="./assets/icons/carbon_location.svg" alt="">
-                    <h1 class="text-24 uppercase font-400 text-white">UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000</h1>
-                </div>
-                <div class="flex flex-col">
-                    <p class="text-14 text-white mt-32 font-400">
-                        Matt Wilson
-                        <br>
-                        WT Capita
-                    </p>
-                    <p class="text-14 text-white font-400 mt-20">matt@wtcapital.com.au</p>
-                </div>
-            <!-- </div> -->
+        <div class="footer px-100 pb-100">
+            <div class="flex items-center gap-10 mt-80">
+                <img src="./assets/icons/carbon_location.svg" alt="">
+                <h1 class="text-24 uppercase font-400 text-white">UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000</h1>
+            </div>
+            <div class="flex flex-col">
+                <p class="text-14 text-white mt-32 font-400">
+                    Matt Wilson
+                    <br>
+                    WT Capita/
+                </p>
+                <p class="text-14 text-white font-400 mt-20">matt@wtcapital.com.au</p>
+            </div>
         </div>
     </section>
 
@@ -52,7 +56,7 @@
         </header>
         <div class="mt-86 flex flex-col">
             <h2 class="text-black text-24 font-400">Executive Summary</h2>
-            <p class="mt-20 text-gray-70 leading-28 text-justify">
+            <p class="mt-20 text-16 text-gray-70 leading-28 text-justify">
                 Situated in Melbourne's high growth corridor, this contemporary low-maintenance property presents 
                 a lucrative opportunity, with a median sale price dropping from $410,000 in 2020-2021 to $380,000 
                 in 2023-2024, potentially below market value. It stands out in a market with rising rental yields, 
@@ -363,12 +367,62 @@
             </div>
         </div>
         <div class="flex flex-col mt-100">
-            <div class="flex justify-between items-center mt-100">
+            <div class="flex justify-between items-center">
                 <h1 class="text-black text-50 font-400">Demand</h1>
                 <p class="text-18 text-gray-70 leading-30 font-400">Short text about how it is calculated</p>
             </div>
             <div class="mt-60">
                 <canvas id="demandChart" width="800" height="250"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-16 container bg-white pb-71 mt-20 px-100">
+        <header class="flex justify-between pt-40">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+            <div class="flex items-center gap-53">
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    Property Report
+                </a>
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                </a>
+            </div>
+        </header>
+        <div class="flex flex-col mt-100">
+            <div class="flex flex-col mt-10">
+                <h1 class="text-black text-50 font-400">Median Rental Yield</h1>
+                <p class="text-18 text-gray-70 leading-30 font-400">
+                    Text about how rental yield is calculated + definition 
+                </p>
+            </div>
+            <div class="guage-chart-main mt-50">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p class="w-100 text-gray-60 font-400 text-24 text-center">Median Rental Yield</p>
+                </figure>
+                <!-- <canvas id="guageChart"></canvas>
+                <p class="w-100 text-gray-60 font-400 text-24 text-center">Median Rental Yield</p> -->
+            </div>
+        </div>
+        <div class="flex flex-col mt-100">
+            <div class="flex flex-col mt-10">
+                <h1 class="text-black text-50 font-400">Property Estimated Value</h1>
+            </div>
+            <div class="guage-chart-main mt-50">
+                <canvas id="guageChartGradient"></canvas>
+                <p class="w-100 text-gray-60 font-400 text-24 text-center">Estimated value</p>
+            </div>
+        </div>
+        <div class="flex flex-col mt-100">
+            <div class="flex flex-col mt-10">
+                <h1 class="text-black text-50 font-400">Property Estimated Value</h1>
+            </div>
+            <div class="guage-chart-main mt-50">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p class="w-100 text-gray-60 font-400 text-24 text-center">Estimated value</p>
+                </figure>
             </div>
         </div>
     </section>
@@ -411,7 +465,7 @@
                 </li>
             </ul>
 
-            <div class="img-wraper mt-40">
+            <div class="img-wraper mt-100">
                 <div class="grid-item">
                     <img src="./assets/images/Rectangle (4).jpg" class="img-full" alt="">
                 </div>
@@ -423,6 +477,54 @@
     </section>
 
     <section class="section-9 container bg-white pb-71 mt-20 px-100">
+        <header class="flex justify-between pt-40">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+            <div class="flex items-center gap-53">
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    Property Report
+                </a>
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                </a>
+            </div>
+        </header>
+        <div class="flex flex-col">
+            <h1 class="text-black text-50 font-400 mt-100">
+                Rental Returns and Vacancy Rates
+            </h1>
+
+            <ul class="mt-40 text-18 text-gray-70 font-400 text-justify leading-30">
+                <li class="mt-26">
+                    In the heart of Melbourne’s thriving metropolis lies a golden opportunity for the astute investor. 
+                    Recent data underscores a compelling narrative: the City of Melbourne is experiencing a robust growth 
+                    in rental demand, evidenced by a staggering 19% increase in house rents and a 12% uptick for units 
+                    in just the past year.
+                </li>
+                <li class="mt-26">
+                    Vacancy rates, once bloated to 11% during the height of the pandemic, have now contracted to a snug 
+                    range between 1% and 3%, signaling a market ripe with potential for high occupancy. The most lucrative 
+                    yields are found in the unit market, with Carlton and Melbourne CBD delivering an impressive 7.3% and 
+                    7.2% respectively, dwarfing the highest house market yield of 3.1% in Kensington.
+                </li>
+                <li class="mt-26">
+                    This property is not merely a residence; it’s a strategic investment in one of the few locales where 
+                    buying trumps renting, promising both immediate yield returns and long-term capital growth. Seize the 
+                    moment to secure a piece of Melbourne’s coveted real estate landscape.
+                </li>
+            </ul>
+
+            <div class="img-wraper mt-100">
+                <div class="grid-item">
+                    <img src="./assets/images/Rectangle (4).jpg" class="img-full" alt="">
+                </div>
+                <div class="grid-item">
+                    <img src="./assets/images/Rectangle (5).jpg" class="img-full" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-10 container bg-white pb-71 mt-20 px-100">
         <header class="flex justify-between pt-40">
             <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
             <div class="flex items-center gap-53">
@@ -460,7 +562,7 @@
                 </li>
             </ul>
 
-            <div class="img-wraper mt-40">
+            <div class="img-wraper mt-100">
                 <div class="grid-item">
                     <img src="./assets/images/Rectangle (4).jpg" class="img-full" alt="">
                 </div>
@@ -471,6 +573,309 @@
         </div>
     </section>
 
+    <section class="section-11 container bg-white pb-71 mt-20 px-100">
+        <header class="flex justify-between pt-40">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+            <div class="flex items-center gap-53">
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    Property Report
+                </a>
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                </a>
+            </div>
+        </header>
+        <div class="flex flex-col">
+            <h1 class="text-black text-50 font-400 mt-100">
+                Council Highlights
+            </h1>
+
+            <div class="council-icons-wraper mt-40">
+                <div class="item  flex flex-col gap-10">
+                    <img src="./assets/icons/ph_users-four-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">Population <br> Growth</p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_chart-line-up-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        High Rental <br> Yields
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_buildings-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        Robust <br> Infrastructure
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_train-simple-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        $35 billion <br> Rail Loop
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_road-horizon-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        $16 billion <br> North East Link
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_first-aid-kit-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        $14 billion <br> Biomedical Precinct
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_briefcase-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        Major Job <br> Node
+                    </p>
+                </div>
+                <div class="item flex flex-col gap-10">
+                    <img src="./assets/icons/ph_flag-pennant-duotone.png" class="icons-img" alt="">
+                    <p class="text-black leading-24 text-18 font-400">
+                        86% High-density <br> Dwellings
+                    </p>
+                </div>
+            </div>
+
+            <ul class="mt-40 text-18 text-gray-70 font-400 text-justify leading-30">
+                <li class="mt-20">
+                    In the heart of one of Australia’s most vibrant cities, the City of Melbourne stands as a beacon 
+                    of growth and opportunity. With a population set to double by 2041 and a demographic that’s young, 
+                    affluent, and highly educated, this is an investment you cannot overlook.
+                </li>
+                <li class="mt-26">
+                    Boasting a resilient economy bouncing back to a forecasted $74 billion in 2024, the area is a hotbed 
+                    for professionals earning above-average incomes. The focus on high-density living, with units and 
+                    townhouses becoming the preferred choice, aligns with modern lifestyle demands and paves the way for 
+                    savvy investment.
+                </li>
+                <li class="mt-26">
+                    Infrastructure projects worth billions promise a surge in job opportunities and further economic uplift. 
+                    The property market is ripe for growth, with Melbourne units experiencing a 2.9% increase in value over 
+                    the past year, and suburbs such as Carlton, Melbourne CBD, and South Yarra primed for future price growth. 
+                    This is your chance to secure a stake in a world-class city that is not just a place to live but a place 
+                    to thrive
+                </li>
+            </ul>
+
+            <h1 class="text-black text-50 font-400 mt-60">
+                Council insights
+            </h1>
+
+            <ul class="mt-40 text-18 text-gray-70 font-400 text-justify leading-30">
+                <li>
+                    In the heart of a thriving metropolis, this investment property stands as a beacon of opportunity 
+                    for the astute investor. Boasting a location in the resilient City of Melbourne, where high-density 
+                    living is increasingly sought after, this property is a gateway to a lifestyle enriched by culture, 
+                    education, and commerce.
+                </li>
+                <li class="mt-26">
+                    With the City serving as a hub for prestigious universities, hospitals, and major business ventures, 
+                    the area is witnessing an impressive suite of infrastructure projects amounting to billions, including 
+                    the monumental $1.7 billion Melbourne Arts Precinct Transformation.
+                </li>
+                <li class="mt-26">
+                    This property benefits from robust population growth and attractive rental yields, positioning it as 
+                    a logical choice for those seeking to capitalise on Melbourne’s dynamic growth and the burgeoning 
+                    demand for connected urban living. With a majority of apartments already snapped up off-the-plan 
+                    in nearby developments and the return of international students fuelling the local economy, the 
+                    time to invest in Melbourne’s future is now.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section-12 container bg-white pb-71 mt-20 px-100">
+        <header class="flex justify-between pt-40">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+            <div class="flex items-center gap-53">
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    Property Report
+                </a>
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                </a>
+            </div>
+        </header>
+        <div class="flex flex-col">
+            <h1 class="text-black text-50 font-400 mt-100">
+                Major Projects Impacting the Region
+            </h1>
+
+            <ul class="mt-40 text-18 text-gray-70 font-400 text-justify leading-30">
+                <li class="mt-26">
+                    With Melbourne’s property market continually evolving, Unit 2901 at 35 Spring Street stands at 
+                    the heart of a thriving and expanding urban landscape. Significant projects in the vicinity are 
+                    set to enhance the desirability and potential of this property, making it a logical choice for 
+                    those looking to invest in a growth-oriented future.
+                </li>
+                <li class="mt-26">
+                    The nearby $1 billion redevelopment of The Melbourne Convention & Exhibition Centre is slated for 
+                    completion in 2025, promising to introduce 45,000sqm of commercial space and 470 build-to-rent units, 
+                    while the $500 million Greystar project in South Yarra will deliver 625 build-to-rent units by the 
+                    same year, generating 1,000 construction jobs.
+                </li>
+                <li class="mt-26">
+                    Additionally, the $14 billion Biomedical Precinct in Parkville will create 10,000 job opportunities
+                    upon completion in 2032, alongside the $6.7 billion Victoria Harbour project in Docklands, concluding 
+                    in 2030 with luxurious high-rise waterfront apartments. These projects not only signify substantial 
+                    job creation but also indicate a robust influx of amenities and infrastructural enhancements that 
+                    invariably bolster property values. Investing in Unit 2901 is not just a purchase; it’s a strategic 
+                    decision to be part of Melbourne’s dynamic future.
+                </li>
+            </ul>
+
+            <div class="img-wraper mt-100">
+                <div class="grid-item">
+                    <img src="./assets/images/Rectangle (4).jpg" class="img-full" alt="">
+                </div>
+                <div class="grid-item">
+                    <img src="./assets/images/Rectangle (5).jpg" class="img-full" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-13 bg-white container bg-white pb-71 mt-20">
+        <div class="px-100 bg-yellow-200 top">
+            <header class="flex justify-between pt-40">
+                <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+                <div class="flex items-center gap-53">
+                    <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                        Property Report
+                    </a>
+                    <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                        UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                    </a>
+                </div>
+            </header>
+            <div class="flex flex-col">
+                <h1 class="text-black text-50 font-400 mt-100">
+                    Breakdown of an Investment
+                </h1>
+                <p class="text-20 font-400 text-black mt-10">
+                    Approximate Loan Calculator & Stamp Duty Fees
+                </p>
+            </div>
+            <div class="mt-60 breakddown-wraper">
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Deposit (20%)</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$168,000</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Stamp Duty</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$45,470</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Mortgage Registration Fee</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$128</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Land Transfer Fee</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$2,071</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Legal / Conveyancer fees</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$2,500</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Bank Fees</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$3,000</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Insurance</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$1,000 (circa)</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Pest & Building Inspection</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$440</p>
+            </div>
+            <div class="divider-gray mt-50"></div>
+            <div class="breakddown-wraper mt-20">
+                <p class="item-start text-18 font-600 leading-20 text-gray-70">Total</p>
+                <p class="item-end text-18 font-600 leading-20 text-gray-70">$222,610</p>
+            </div>
+        </div>
+        <div class="px-100 bottom mt-80">
+            <div class="flex flex-col">
+                <h1 class="text-black text-50 font-400">
+                    Breakdown of Loan
+                </h1>
+            </div>
+            <div class="mt-32 breakddown-wraper">
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Loan</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">$672,000 (80%)</p>
+    
+                <p class="item-start text-18 font-400 leading-20 text-gray-70">Interest rate</p>
+                <p class="item-end text-18 font-400 leading-20 text-gray-70">7.36%</p>
+            </div>
+            <div class="divider-gray-2 mt-50"></div>
+            <div class="breakddown-wraper total mt-20">
+                <p class="item-start text-18 font-600 leading-20 text-gray-70">
+                    Principal and interest loan repayments
+                </p>
+                <p class="item-end text-18 font-600 leading-20 text-gray-70">
+                    $4,635 per month
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-14 container bg-white pb-71 px-100 mt-20 pb-160">
+        <header class="flex justify-between pt-40">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_CHARCOAL.png" alt="">
+            <div class="flex items-center gap-53">
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    Property Report
+                </a>
+                <a href="#" class="decoration-none text-11 text-gray-60 uppercase font-400">
+                    UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000
+                </a>
+            </div>
+        </header>
+        
+        <h1 class="text-50 font-400 text-black mt-100">Property Images</h1>
+        <div class="img-wraper mt-40">
+            <div class="grid-item">
+                <img src="./assets/images/property-1.png" class="img-full" alt="">
+            </div>
+            <div class="grid-item">
+                <img src="./assets/images/property-2.png" class="img-full" alt="">
+            </div>
+            <div class="grid-item">
+                <img src="./assets/images/property-3.png" class="img-full" alt="">
+            </div>
+            <div class="grid-item">
+                <img src="./assets/images/property-4.png" class="img-full" alt="">
+            </div>
+            <div class="grid-item">
+                <img src="./assets/images/property-5.png" class="img-full" alt="">
+            </div>
+            <div class="grid-item">
+                <img src="./assets/images/property-6.png" class="img-full" alt="">
+            </div>
+        </div>
+    </section>
+
+    <section id="section-15" class="section-15 container bg-green mt-20">
+        <header class="header-1 px-100 pt-107">
+            <img src="./assets/WT-CAPITAL_RGB_LOCKUP_WHITE.png" alt="">
+            <h2 class="text-white text-24">Property Report</h2>
+        </header>
+        <div class="w-100 flex justify-end">
+            <div class="divider-gradient"></div>
+        </div>
+        <div class="footer px-100 pb-100">
+            <div class="flex items-center gap-10 mt-80">
+                <img src="./assets/icons/carbon_location.svg" alt="">
+                <h1 class="text-24 uppercase font-400 text-white">UNIT 2901, 35 SPRING STREET, MELBOURNE VIC 3000</h1>
+            </div>
+            <div class="flex flex-col">
+                <p class="text-14 text-white mt-32 font-400">
+                    Matt Wilson
+                    <br>
+                    WT Capital
+                </p>
+                <p class="text-14 text-white font-400 mt-20">matt@wtcapital.com.au</p>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>
