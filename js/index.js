@@ -3,7 +3,7 @@
         labels: ['Mar 19 - 20', 'Apr 19 - 20', 'May 19 - 20', 'Jun 19 - 20', 'Jul 19 - 20'],
         datasets: [{
             label: 'Median Sale Price',
-            data: [450, 351, 500, 330, 435],
+            data: [450, 351, 330, 435, 500],
             backgroundColor: '#19271F',
             borderColor: '#19271F',
             borderWidth: 1,
@@ -68,7 +68,7 @@
         labels: ['Mar 19 - 20', 'Apr 19 - 20', 'May 19 - 20', 'Jun 19 - 20', 'Jul 19 - 20'],
         datasets: [{
             label: 'Median Sale Price',
-            data: [290000, 410000, 320000, 370000, 410000],
+            data: [403750, 410000, 371500, 390000, 380000],
             backgroundColor: '#19271F',
             borderColor: '#19271F',
             borderWidth: 1,
@@ -214,7 +214,7 @@ const chartDemandData = {
     labels: ['Apr 23', 'May 23', 'Jun 23', 'Jul 23', 'Aug 23', 'Sep 23', 'Oct 23', 'Nov 23', 'Dec 23', 'Jan 23', 'Feb 23'],
     datasets: [{
         label: 'Median Sale Price',
-        data: [125, 200, 302, 200, 300, 400, 300, 100, 300, 200, 300],
+        data: [1025, 2000, 3002, 2000, 3000, 4000, 3000, 1000, 3000, 2000, 3000],
         backgroundColor: '#19271F',
         borderColor: '#19271F',
         borderWidth: 1,
@@ -225,14 +225,14 @@ const chartDemandData = {
 const chartDemandOptions = {
     scales: {
         y: {
-            min: -500,
-            max: 500,
+            min: 0,
+            max: 6000,
             ticks: {
-                stepSize: 100,
+                stepSize: 1000,
                 callback: function(value, index, values) {
                     return Math.abs(value).toLocaleString();
                 },
-                color: 'transparent'
+                // color: 'transparent'
             },
             grid: {
                 display: true,
@@ -256,14 +256,16 @@ const chartDemandOptions = {
         datalabels: {
             anchor: 'start',
             align: 'end',
-            // color: '#3FBE12',
+            color: '#3FBE12',
             formatter: function(value, context) {
-                let diff = (value - referenceValue) / referenceValue * 100;
+                let diff = (value - 3000) / 3000 * 100;
                 diff = parseFloat(diff.toFixed(2));
+                console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
                 const color = diff >= 0 ? '#3FBE12' : 'red';
+                console.log("color is ", color)
                 // context.dataset.datalabels. = color;
-                context.dataLabels.anchor = color
+                // context.ChartDataLabels.backgroundColor = color
                 return prefix + diff + '%';
                 // return prefix + diff + '%'
             }
@@ -281,8 +283,8 @@ const chartDemandOptions = {
 const ctxDemand = document.getElementById('demandChart').getContext('2d');
 const medianDemandPriceChart = new Chart(ctxDemand, {
     type: 'bar',
-    data: chartSupplyData,
-    options: chartSupplyOptions,
+    data: chartDemandData,
+    options: chartDemandOptions,
     plugins: [ChartDataLabels]
 });
 
