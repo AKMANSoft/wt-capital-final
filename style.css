@@ -302,6 +302,7 @@ body {
     row-gap: 39px;
   margin-top: 70px;
   padding: 10px;
+  padding-top: 0px;
 }
 
 
@@ -325,7 +326,7 @@ body {
 .section-14 .img-wraper .grid-item{
     width: 100%;
     height: 100%;
-    aspect-ratio: 1.16;
+    aspect-ratio: 1.165;
 }
 .section-3 .img-wraper .grid-item img,
 .section-14 .img-wraper .grid-item img{
