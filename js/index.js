@@ -133,7 +133,7 @@ const chartSupplyData = {
     labels: ['Apr 23', 'May 23', 'Jun 23', 'Jul 23', 'Aug 23', 'Sep 23', 'Oct 23', 'Nov 23', 'Dec 23', 'Jan 23', 'Feb 23'],
     datasets: [{
         label: 'Median Sale Price',
-        data: [120, 200, 300, 200, 300, 400, 300, 100, 300, 200, 300], // Adjusted to include both positive and negative values
+        data: [120, 200, 300, 200, 300, 400, 300, 100, 300, 200, 300],
         backgroundColor: '#19271F',
         borderColor: '#19271F',
         borderWidth: 1,
@@ -145,12 +145,12 @@ let col = '#3FBE12'
 const chartSupplyOptions = {
     scales: {
         y: {
-            min: 0, // Adjusted min value to accommodate negative values
+            min: 0,
             max: 500,
             ticks: {
                 stepSize: 100,
                 callback: function(value, index, values) {
-                    return Math.abs(value).toLocaleString(); // Use absolute value for tick labels
+                    return Math.abs(value).toLocaleString();
                 },
                 // color: 'transparent'
             },
@@ -180,9 +180,12 @@ const chartSupplyOptions = {
             formatter: function(value, context) {
                 let diff = (value - referenceValue) / referenceValue * 100;
                 diff = parseFloat(diff.toFixed(2));
+                console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
                 const color = diff >= 0 ? '#3FBE12' : 'red';
+                console.log("color is ", color)
                 // context.dataset.datalabels. = color;
+                // context.ChartDataLabels.backgroundColor = color
                 return prefix + diff + '%';
                 // return prefix + diff + '%'
             }
@@ -211,7 +214,7 @@ const chartDemandData = {
     labels: ['Apr 23', 'May 23', 'Jun 23', 'Jul 23', 'Aug 23', 'Sep 23', 'Oct 23', 'Nov 23', 'Dec 23', 'Jan 23', 'Feb 23'],
     datasets: [{
         label: 'Median Sale Price',
-        data: [120, 200, 300, 200, 300, 400, 300, 100, 300, 200, 300],
+        data: [125, 200, 302, 200, 300, 400, 300, 100, 300, 200, 300],
         backgroundColor: '#19271F',
         borderColor: '#19271F',
         borderWidth: 1,
@@ -253,11 +256,16 @@ const chartDemandOptions = {
         datalabels: {
             anchor: 'start',
             align: 'end',
-            color: '#3FBE12',
+            // color: '#3FBE12',
             formatter: function(value, context) {
-                const percentage = Math.abs((value / 1000) * 100);
-                const prefix = value >= 0 ? "+" : "-"; // check if value is positive or negative
-                return prefix + parseInt(percentage) + '%';
+                let diff = (value - referenceValue) / referenceValue * 100;
+                diff = parseFloat(diff.toFixed(2));
+                const prefix = diff >= 0 ? "+" : "";
+                const color = diff >= 0 ? '#3FBE12' : 'red';
+                // context.dataset.datalabels. = color;
+                context.dataLabels.anchor = color
+                return prefix + diff + '%';
+                // return prefix + diff + '%'
             }
         },
         labels: {
