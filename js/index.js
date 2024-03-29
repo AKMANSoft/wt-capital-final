@@ -306,7 +306,6 @@ Highcharts.chart('container', {
         height: '81%',
         marginLeft: 50,
         marginRight: 50,
-        // marginTop: scrnWidth > 1200 ? 0 : -50,
         marginBottom: scrnWidth > 1200 ? 0 : 50
     },
 
