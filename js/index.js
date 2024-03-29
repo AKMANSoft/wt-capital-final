@@ -300,7 +300,7 @@ Highcharts.chart('container', {
         height: '81%',
         marginLeft: 50,
         marginRight: 50,
-        marginBottom: scrnWidth > 1050 ? 0 : 50
+        marginBottom: scrnWidth > 1200 ? 0 : 50
     },
 
     title: {
@@ -400,7 +400,7 @@ Highcharts.chart('container2', {
         height: '81%',
         marginLeft: 50,
         marginRight: 50,
-        marginBottom: scrnWidth > 1050 ? 0 : 50
+        marginBottom: scrnWidth > 1200 ? 0 : 50
     },
 
     title: {
