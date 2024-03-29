@@ -467,7 +467,10 @@ ul li {
    /* height: 665px; */
    aspect-ratio: 1.35;
 }
-.highcharts-figure,
+.highcharts-figure{
+    width: 116%;
+    margin-left: -8%;
+}
 .highcharts-data-table table {
     width: 100%;
 }

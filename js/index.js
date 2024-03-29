@@ -141,7 +141,7 @@ const chartSupplyData = {
     }]
 };
 const referenceValue = 300;
-let col = '#3FBE12'
+
 const chartSupplyOptions = {
     scales: {
         y: {
@@ -176,19 +176,20 @@ const chartSupplyOptions = {
         datalabels: {
             anchor: 'start',
             align: 'end',
-            color: col,
             formatter: function(value, context) {
                 let diff = (value - referenceValue) / referenceValue * 100;
                 diff = parseFloat(diff.toFixed(2));
                 console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
-                const color = diff >= 0 ? '#3FBE12' : 'red';
+                const color = diff >= 0 ? '#3FBE12' : '#DD5855';
+                col = color
                 console.log("color is ", color)
-                // context.dataset.datalabels. = color;
-                // context.ChartDataLabels.backgroundColor = color
                 return prefix + diff + '%';
-                // return prefix + diff + '%'
-            }
+            },
+            color: function(context) {
+                const diff = (context.dataset.data[context.dataIndex] - referenceValue) / referenceValue * 100;
+                return diff >= 0 ? '#3FBE12' : '#DD5855';
+            },
         },
         labels: {
             title: {
@@ -256,19 +257,22 @@ const chartDemandOptions = {
         datalabels: {
             anchor: 'start',
             align: 'end',
-            color: '#3FBE12',
             formatter: function(value, context) {
                 let diff = (value - 3000) / 3000 * 100;
                 diff = parseFloat(diff.toFixed(2));
                 console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
-                const color = diff >= 0 ? '#3FBE12' : 'red';
+                const color = diff >= 0 ? '#3FBE12' : '#DD5855';
                 console.log("color is ", color)
                 // context.dataset.datalabels. = color;
                 // context.ChartDataLabels.backgroundColor = color
                 return prefix + diff + '%';
                 // return prefix + diff + '%'
-            }
+            },
+            color: function(context) {
+                const diff = (context.dataset.data[context.dataIndex] - 3000) / 3000 * 100;
+                return diff >= 0 ? '#3FBE12' : '#DD5855';
+            },
         },
         labels: {
             title: {
@@ -302,6 +306,7 @@ Highcharts.chart('container', {
         height: '81%',
         marginLeft: 50,
         marginRight: 50,
+        // marginTop: scrnWidth > 1200 ? 0 : -50,
         marginBottom: scrnWidth > 1200 ? 0 : 50
     },
 
@@ -331,7 +336,7 @@ Highcharts.chart('container', {
         labels: {
             distance: scrnWidth > 1330 ? 30 : 25,
             style: {
-                fontSize: scrnWidth > 1330 ? '25px' : scrnWidth > 1155 ? '20px' : '15px'
+                fontSize: scrnWidth > 1330 ? '25px' : '20px'
             }
         },
         lineWidth: 0,
@@ -339,17 +344,17 @@ Highcharts.chart('container', {
             from: 5.0,
             to: 6.0,
             color: '#C4D56D', // green
-            thickness: 65
+            thickness: 75
         }, {
             from: 6.0,
             to: 6.5,
             color: '#F3EE60', // yellow
-            thickness: 65
+            thickness: 75
         }, {
             from: 6.5,
             to: 7.5,
             color: '#DD5855', // red
-            thickness: 65
+            thickness: 75
         }]
     },
 
@@ -376,15 +381,17 @@ Highcharts.chart('container', {
             x: -12
         },
         dial: {
-            radius: '80%',
+            radius: scrnWidth > 1190 ? '80%' : '70%',
             backgroundColor: 'black',
-            baseWidth: 12,
+            baseWidth: 21,
             baseLength: '0%',
             rearLength: '0%'
         },
         pivot: {
-            backgroundColor: 'black',
-            radius: 25
+            backgroundColor: 'white',
+            borderWidth: 14,
+            borderColor: 'black',
+            radius: 20
         }
 
     }]
@@ -445,12 +452,12 @@ Highcharts.chart('container2', {
             color: {
                 linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
                 stops: [
-                    [0.0398, '#F0D251'], // 3.98%
-                    [0.4953, '#91CF4B'], // 49.53%
-                    [0.9716, '#E97634']  // 97.16%
+                    [0.0398, '#F0D251'],
+                    [0.4953, '#91CF4B'],
+                    [0.9716, '#E97634'] 
                 ]
             },
-            thickness: 65
+            thickness: 75
         }]
     },
 
@@ -478,15 +485,17 @@ Highcharts.chart('container2', {
             x: -30
         },
         dial: {
-            radius: '80%',
+            radius: scrnWidth > 1190 ? '80%' : '70%',
             backgroundColor: 'black',
-            baseWidth: 12,
+            baseWidth: 21,
             baseLength: '0%',
             rearLength: '0%'
         },
         pivot: {
-            backgroundColor: 'black',
-            radius: 25
+            backgroundColor: 'white',
+            borderWidth: 14,
+            borderColor: 'black',
+            radius: 20
         }
 
     }]
