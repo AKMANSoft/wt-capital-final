@@ -256,6 +256,9 @@ body {
 
 
 /* SECTION 1 STYLING */
+.section-1{
+    height: 840px;
+}
 .header-1{
     display: flex;
     justify-content: space-between;
@@ -459,15 +462,9 @@ ul li {
 
 
 
-.highcharts-figure #container{
+.highcharts-figure #container, .highcharts-figure #container2{
    /* height: 665px; */
    aspect-ratio: 1.35;
-}
-.highcharts-figure .text-gray-60{
-    /* position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 13%; */
 }
 .highcharts-figure,
 .highcharts-data-table table {
@@ -500,17 +497,9 @@ ul li {
 .highcharts-data-table caption {
     padding: 0.5em;
 }
-
-.highcharts-data-table thead tr,
-.highcharts-data-table tr:nth-child(even) {
-    background: red;
-}
-
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
 .highcharts-credits, .highcharts-exporting-group{
     display: none;
 }
-
-/* @media only screen and (max-width: ) */

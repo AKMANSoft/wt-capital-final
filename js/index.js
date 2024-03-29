@@ -21,7 +21,7 @@
                     callback: function(value, index, values) {
                         return value.toLocaleString();
                     },
-                    color: 'tarnsparent'
+                    // color: 'black',
                 },
                 grid: {
                     display: true, 
@@ -43,8 +43,8 @@
                 display: false
             },
             datalabels: {
-                anchor: 'end',
-                align: 'bottom',
+                anchor: 'start',
+                align: 'start',
                 color: 'white',
                 formatter: function(value, context) {
                     return '$' + value.toLocaleString();
@@ -63,7 +63,7 @@
 
 
 
-// MEDIA SALE CHART
+// MEDIA SALE BAR CHART
     const chartSaleData = {
         labels: ['Mar 19 - 20', 'Apr 19 - 20', 'May 19 - 20', 'Jun 19 - 20', 'Jul 19 - 20'],
         datasets: [{
@@ -108,8 +108,8 @@
                 display: false 
             },
             datalabels: {
-                anchor: 'end',
-                align: 'bottom',
+                anchor: 'start',
+                align: 'start',
                 color: 'white',
                 formatter: function(value, context) {
                     return '$' + value.toLocaleString();
@@ -128,30 +128,31 @@
 
 
 
-// SUPPLY CHART
+// SUPPLY BAR CHART
 const chartSupplyData = {
     labels: ['Apr 23', 'May 23', 'Jun 23', 'Jul 23', 'Aug 23', 'Sep 23', 'Oct 23', 'Nov 23', 'Dec 23', 'Jan 23', 'Feb 23'],
     datasets: [{
         label: 'Median Sale Price',
-        data: [120, 200, 300, 200, 300, 400, 300, 100, 300, 200, 300],
+        data: [120, 200, 300, 200, 300, 400, 300, 100, 300, 200, 300], // Adjusted to include both positive and negative values
         backgroundColor: '#19271F',
         borderColor: '#19271F',
         borderWidth: 1,
         barThickness: 40
     }]
 };
-
+const referenceValue = 300;
+let col = '#3FBE12'
 const chartSupplyOptions = {
     scales: {
         y: {
-            min: 0,
+            min: 0, // Adjusted min value to accommodate negative values
             max: 500,
             ticks: {
                 stepSize: 100,
                 callback: function(value, index, values) {
-                    return value.toLocaleString();
+                    return Math.abs(value).toLocaleString(); // Use absolute value for tick labels
                 },
-                color: 'tarnsparent'
+                // color: 'transparent'
             },
             grid: {
                 display: true, 
@@ -173,11 +174,17 @@ const chartSupplyOptions = {
             display: false
         },
         datalabels: {
-            anchor: 'end',
+            anchor: 'start',
             align: 'end',
-            color: '#3FBE12',
+            color: col,
             formatter: function(value, context) {
-                return "+"+parseInt((value.toLocaleString()/1000)*100) +'%';
+                let diff = (value - referenceValue) / referenceValue * 100;
+                diff = parseFloat(diff.toFixed(2));
+                const prefix = diff >= 0 ? "+" : "";
+                const color = diff >= 0 ? '#3FBE12' : 'red';
+                // context.dataset.datalabels. = color;
+                return prefix + diff + '%';
+                // return prefix + diff + '%'
             }
         },
         labels: {
@@ -199,7 +206,7 @@ const medianSupplyPriceChart = new Chart(ctxSupply, {
 });
 
 
-// DEMAND CHART
+// DEMAND BAR CHART
 const chartDemandData = {
     labels: ['Apr 23', 'May 23', 'Jun 23', 'Jul 23', 'Aug 23', 'Sep 23', 'Oct 23', 'Nov 23', 'Dec 23', 'Jan 23', 'Feb 23'],
     datasets: [{
@@ -215,24 +222,24 @@ const chartDemandData = {
 const chartDemandOptions = {
     scales: {
         y: {
-            min: 0,
+            min: -500,
             max: 500,
             ticks: {
                 stepSize: 100,
                 callback: function(value, index, values) {
-                    return value.toLocaleString();
+                    return Math.abs(value).toLocaleString();
                 },
-                color: 'tarnsparent'
+                color: 'transparent'
             },
             grid: {
-                display: true, 
-                drawBorder: false 
+                display: true,
+                drawBorder: false
             }
         },
         x: {
             grid: {
-                display: false, 
-                drawBorder: false 
+                display: false,
+                drawBorder: false
             }
         }
     },
@@ -244,11 +251,13 @@ const chartDemandOptions = {
             display: false
         },
         datalabels: {
-            anchor: 'end',
+            anchor: 'start',
             align: 'end',
             color: '#3FBE12',
             formatter: function(value, context) {
-                return "+"+parseInt((value.toLocaleString()/1000)*100) +'%';
+                const percentage = Math.abs((value / 1000) * 100);
+                const prefix = value >= 0 ? "+" : "-"; // check if value is positive or negative
+                return prefix + parseInt(percentage) + '%';
             }
         },
         labels: {
@@ -270,326 +279,8 @@ const medianDemandPriceChart = new Chart(ctxDemand, {
 });
 
 
-
-
-
-
-// GUAGE CHART
-const data = {
-    labels: [6,8,6],
-    datasets: [{
-      label: 'Weekly Sales',
-      data: [10, 6, 10],
-      backgroundColor: [
-        '#C4D56D',
-        '#F3EE60',
-        '#DD5855',
-      ],
-      borderColor: [
-        '#C4D56D',
-        '#F3EE60',
-        '#DD5855',
-      ],
-      borderWidth: 1,
-      circumference: 180,
-      rotation: 270,
-      cutout: '84%',
-      needleValue: 13
-    }]
-  };
-
-  const guageNeedle = {
-    id: 'guageNeedle',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, data } = chart
-        ctx.save()
-        const xCenter = chart.getDatasetMeta(0).data[0].x
-        const yCenter = chart.getDatasetMeta(0).data[0].y
-        const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius
-        const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius
-        const widthSlice = (outerRadius - innerRadius)/2
-        const radius = 25
-        const angle = Math.PI / 180
-
-        const needleValue = data.datasets[0].needleValue
-
-        const dataTotal = data.datasets[0].data.reduce((a, b) => a + b, 0)
-
-        const circumference = ((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0]) * needleValue
-
-        ctx.translate(xCenter, yCenter)
-        ctx.rotate(Math.PI * (circumference + 1.5))
-
-        ctx.beginPath()
-        ctx.strokeStyle = '#020302'
-        ctx.fillStyle = '#020302'
-        // ctx.lineWidth = 3
-        ctx.moveTo(0 - 8, 0)
-        ctx.lineTo(0, 0 - innerRadius +40)
-        ctx.lineTo(0 + 8, 0)
-        // ctx.closePath()
-        ctx.stroke()
-        ctx.fill()
-
-        
-        ctx.beginPath()
-        // ctx.arc(x, y, radius, angleStart, angleEnd, vfalse)
-        ctx.arc(0, 0, radius, 0, angle * 360, false)
-        ctx.fill()
-
-        ctx.beginPath()
-        // ctx.arc(x, y, radius, angleStart, angleEnd, vfalse)
-        ctx.arc(0, 0, 12, 0, angle * 360, false)
-        ctx.fillStyle = 'white'
-        ctx.fill()
-        
-        ctx.restore()
-    }
-  }
-
-  const guageFlowMeter = {
-    id: 'guageFlowMeter',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, data } = chart
-
-        ctx.save()
-        const needleValue = data.datasets[0].needleValue
-        const xCenter = chart.getDatasetMeta(0).data[0].x
-        const yCenter = chart.getDatasetMeta(0).data[0].y
-
-        const circumference = ((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0]) * needleValue
-        const perValue = circumference * 100
-        ctx.font = "43px Sculpin"
-        ctx.fillStyle = '#020302'
-        ctx.textAlign = 'center'
-        ctx.fillText(6.91, xCenter, yCenter + 80)
-    }
-  }
-
-  const guageLables = {
-    id: 'guageLables',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, chartArea: {left, right} } = chart
-        const xCenter = chart.getDatasetMeta(0).data[0].x
-        const yCenter = chart.getDatasetMeta(0).data[0].y
-
-        const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius
-        const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius
-        const widthSlice = (outerRadius - innerRadius)/2
-        ctx.translate(xCenter, yCenter)
-        ctx.font = "bold 15px sans-serif"
-        ctx.fillStyle = 'grey'
-        ctx.textAlign = 'left'
-        ctx.fillText('5.0', 0 - outerRadius-40, 0)
-        ctx.fillText('5.5', 0 - outerRadius-40, 0)
-        // ctx.fillText('6.0', 0 - outerRadius+300, -480)
-        // ctx.fillText('6.5', 0 - outerRadius+300, -480)
-        // ctx.fillText('6.0', 0 + innerRadius + widthSlice, 0 + 20)
-
-        ctx.restore()
-    }
-  }
-
-  const config = {
-    type: 'doughnut',
-    data,
-    options: {
-        layout: {
-            padding: {
-                left: 50,
-                right: 50,
-                // top: 0,
-                bottom: 20
-            }
-        },
-      aspectRatio: 1.5,
-      plugins: {
-        legend: {
-            display: false
-        },
-        tooltip: {
-            enabled: false
-        }
-      }
-    },
-    plugins: [guageNeedle, guageFlowMeter, guageLables]
-  };
-
-//   const myChart = new Chart(
-//     document.getElementById('guageChart'),
-//     config
-//   );
-//   const chartVersion = document.getElementById('chartVersion');
-
-
-
-
-//   GRADIENT GUAGE CHART
-  function createGradient(chart) {
-    const{ ctx, chartArea: {left, right} } = chart
-    // const gradientSegment = ctx.createElement('canvas').getContext('2d');
-    const gradient = ctx.createLinearGradient(left, 0, right, 0);
-    gradient.addColorStop(0, "#F0D251");
-    gradient.addColorStop(0.5, "#91CF4B");
-    gradient.addColorStop(1, "#E97634");
-    return gradient;
-}
-
-const gradientChartData = {
-    labels: [6,8,6],
-    datasets: [{
-      label: 'Weekly Sales',
-      data: [9, 8, 9],
-      backgroundColor: (context) => {
-        const chart = context.chart
-        const { ctx, chartArea } = chart
-
-        if(!chartArea) return null
-
-        if(chartArea.dataIndex !== 0) {
-            return createGradient(chart)
-        }else{
-            return 'black'
-        }
-      },
-      borderWidth: 1,
-      circumference: 180,
-      rotation: 270,
-      cutout: '84%',
-      needleValue: 13
-    }]
-  };
-
-  const gradientGuageNeedle = {
-    id: 'gradientGuageNeedle',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, data } = chart
-        ctx.save()
-        const xCenter = chart.getDatasetMeta(0).data[0]?.x
-        const yCenter = chart.getDatasetMeta(0).data[0]?.y
-        const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius
-        const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius
-        const widthSlice = (outerRadius - innerRadius)/2
-        const radius = 25
-        const angle = Math.PI / 180
-
-        const needleValue = data.datasets[0].needleValue
-
-        const dataTotal = data.datasets[0].data.reduce((a, b) => a + b, 0)
-
-        const circumference = ((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0]) * needleValue
-
-        ctx.translate(xCenter, yCenter)
-        ctx.rotate(Math.PI * (circumference + 1.5))
-
-        ctx.beginPath()
-        ctx.strokeStyle = '#020302'
-        ctx.fillStyle = '#020302'
-        // ctx.lineWidth = 3
-        ctx.moveTo(0 - 8, 0)
-        ctx.lineTo(0, 0 - innerRadius +40)
-        ctx.lineTo(0 + 8, 0)
-        // ctx.closePath()
-        ctx.stroke()
-        ctx.fill()
-
-        
-        ctx.beginPath()
-        // ctx.arc(x, y, radius, angleStart, angleEnd, vfalse)
-        ctx.arc(0, 0, radius, 0, angle * 360, false)
-        ctx.fill()
-
-        ctx.beginPath()
-        // ctx.arc(x, y, radius, angleStart, angleEnd, vfalse)
-        ctx.arc(0, 0, 12, 0, angle * 360, false)
-        ctx.fillStyle = 'white'
-        ctx.fill()
-        
-        ctx.restore()
-    }
-  }
-
-  const gradientGuageFlowMeter = {
-    id: 'guageFlowMeter',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, data } = chart
-
-        ctx.save()
-        const needleValue = data.datasets[0].needleValue
-        const xCenter = chart.getDatasetMeta(0).data[0].x
-        const yCenter = chart.getDatasetMeta(0).data[0].y
-
-        const circumference = ((chart.getDatasetMeta(0).data[0].circumference / Math.PI) / data.datasets[0].data[0]) * needleValue
-        const perValue = circumference * 100
-        ctx.font = "43px Sculpin"
-        ctx.fillStyle = '#020302'
-        ctx.textAlign = 'center'
-        ctx.fillText("$840,000", xCenter, yCenter + 80)
-    }
-  }
-
-  const gradientGuageLables = {
-    id: 'guageLables',
-    afterDatasetsDraw(chart, args, plugins) {
-        const{ ctx, chartArea: {left, right} } = chart
-        const xCenter = chart.getDatasetMeta(0).data[0].x
-        const yCenter = chart.getDatasetMeta(0).data[0].y
-
-        const outerRadius = chart.getDatasetMeta(0).data[0].outerRadius
-        const innerRadius = chart.getDatasetMeta(0).data[0].innerRadius
-        const widthSlice = (outerRadius - innerRadius)/2
-        ctx.translate(xCenter, yCenter)
-        ctx.font = "bold 15px sans-serif"
-        ctx.fillStyle = 'grey'
-        ctx.textAlign = 'left'
-        ctx.fillText('5.0', 0 - outerRadius-40, 0)
-        ctx.fillText('5.5', 0 - outerRadius-40, 0)
-        // ctx.fillText('6.0', 0 - outerRadius+300, -480)
-        // ctx.fillText('6.5', 0 - outerRadius+300, -480)
-        // ctx.fillText('6.0', 0 + innerRadius + widthSlice, 0 + 20)
-
-        ctx.restore()
-    }
-  }
- 
-  const gradientConfig = {
-    type: 'doughnut',
-    data: gradientChartData,
-    options: {
-        layout: {
-            padding: {
-                left: 50,
-                right: 50,
-                // top: 0,
-                bottom: 20
-            }
-        },
-      aspectRatio: 1.5,
-      plugins: {
-        legend: {
-            display: false
-        },
-        tooltip: {
-            enabled: false
-        }
-      }
-    },
-    plugins: [gradientGuageNeedle, gradientGuageFlowMeter, gradientGuageLables]
-  };
-
-//   const gradientChart = new Chart(
-//     document.getElementById('guageChartGradient'),
-//     gradientConfig
-//   );
-//   const gradientChartVersion = document.getElementById('chartVersion');
-
-
-
-
-
-
+// GUAGE CHARTS
 const scrnWidth = window.innerWidth
-
 Highcharts.chart('container', {
 
     chart: {
@@ -599,7 +290,9 @@ Highcharts.chart('container', {
         plotBorderWidth: 0,
         plotShadow: false,
         height: '81%',
-        // width: '60%'
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: scrnWidth > 1050 ? 0 : 50
     },
 
     title: {
@@ -618,6 +311,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 5,
         max: 7.5,
+        tickInterval: 0.5,
         tickPixelInterval: scrnWidth > 1330 ? 250 : scrnWidth > 1155 ? 200 : scrnWidth > 945 ? 150 : 100,
         tickPosition: 'outside',
         tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -635,17 +329,17 @@ Highcharts.chart('container', {
             from: 5.0,
             to: 6.0,
             color: '#C4D56D', // green
-            thickness: 55
+            thickness: 65
         }, {
             from: 6.0,
             to: 6.5,
             color: '#F3EE60', // yellow
-            thickness: 55
+            thickness: 65
         }, {
             from: 6.5,
             to: 7.5,
             color: '#DD5855', // red
-            thickness: 55
+            thickness: 65
         }]
     },
 
@@ -666,7 +360,10 @@ Highcharts.chart('container', {
             style: {
                 fontSize: '43px',
                 fontFamily: 'Sculpin'
-            }
+            },
+            verticalAlign: 'bottom',
+            y: 120,
+            x: -12
         },
         dial: {
             radius: '80%',
@@ -684,7 +381,6 @@ Highcharts.chart('container', {
 
 });
 
-
 Highcharts.chart('container2', {
 
     chart: {
@@ -694,7 +390,9 @@ Highcharts.chart('container2', {
         plotBorderWidth: 0,
         plotShadow: false,
         height: '81%',
-        // width: '60%'
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: scrnWidth > 1050 ? 0 : 50
     },
 
     title: {
@@ -713,6 +411,7 @@ Highcharts.chart('container2', {
     yAxis: {
         min: 830000,
         max: 850000,
+        tickInterval: 5000,
         tickPixelInterval: scrnWidth > 1330 ? 300 : scrnWidth > 1155 ? 200 : scrnWidth > 945 ? 150 : 100,
         tickPosition: 'outside',
         tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -720,9 +419,13 @@ Highcharts.chart('container2', {
         tickWidth: 1,
         minorTickInterval: null,
         labels: {
-            distance: scrnWidth > 1330 ? 30 : 25,
+            distance: 20, 
+            rotation: 'auto', 
+            formatter: function() {
+                return this.value.toLocaleString(); 
+            },
             style: {
-                fontSize: scrnWidth > 1330 ? '25px' : scrnWidth > 1155 ? '20px' : '15px'
+                fontSize: '25px'
             }
         },
         lineWidth: 0,
@@ -737,34 +440,18 @@ Highcharts.chart('container2', {
                     [0.9716, '#E97634']  // 97.16%
                 ]
             },
-            thickness: 55
+            thickness: 65
         }]
-        // plotBands: [{
-        //     from: 5.0,
-        //     to: 6.0,
-        //     color: '#C4D56D', // green
-        //     thickness: 55
-        // }, {
-        //     from: 6.0,
-        //     to: 6.5,
-        //     color: '#F3EE60', // yellow
-        //     thickness: 55
-        // }, {
-        //     from: 6.5,
-        //     to: 7.5,
-        //     color: '#DD5855', // red
-        //     thickness: 55
-        // }]
     },
 
     series: [{
         name: 'Speed',
-        data: [6.91],
+        data: [840000],
         tooltip: {
             valueSuffix: ''
         },
         dataLabels: {
-            format: '{y}',
+            format: '${y}',
             borderWidth: 0,
             color: (
                 Highcharts.defaultOptions.title &&
@@ -773,8 +460,12 @@ Highcharts.chart('container2', {
             ) || '#333333',
             style: {
                 fontSize: '43px',
-                fontFamily: 'Sculpin'
-            }
+                fontFamily: 'Sculpin',
+                fontWeight: '400'
+            },
+            verticalAlign: 'bottom',
+            y: 120,
+            x: -30
         },
         dial: {
             radius: '80%',
