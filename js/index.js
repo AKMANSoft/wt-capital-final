@@ -415,11 +415,11 @@ const data = {
     plugins: [guageNeedle, guageFlowMeter, guageLables]
   };
 
-  const myChart = new Chart(
-    document.getElementById('guageChart'),
-    config
-  );
-  const chartVersion = document.getElementById('chartVersion');
+//   const myChart = new Chart(
+//     document.getElementById('guageChart'),
+//     config
+//   );
+//   const chartVersion = document.getElementById('chartVersion');
 
 
 
@@ -577,20 +577,20 @@ const gradientChartData = {
     plugins: [gradientGuageNeedle, gradientGuageFlowMeter, gradientGuageLables]
   };
 
-  const gradientChart = new Chart(
-    document.getElementById('guageChartGradient'),
-    gradientConfig
-  );
-  const gradientChartVersion = document.getElementById('chartVersion');
+//   const gradientChart = new Chart(
+//     document.getElementById('guageChartGradient'),
+//     gradientConfig
+//   );
+//   const gradientChartVersion = document.getElementById('chartVersion');
 
 
 
 
 
 
+const scrnWidth = window.innerWidth
 
-
-  Highcharts.chart('container', {
+Highcharts.chart('container', {
 
     chart: {
         type: 'gauge',
@@ -685,20 +685,109 @@ const gradientChartData = {
 });
 
 
+Highcharts.chart('container2', {
 
-// // Add some life
-// setInterval(() => {
-//     const chart = Highcharts.charts[0];
-//     if (chart && !chart.renderer.forExport) {
-//         const point = chart.series[0].points[0],
-//             inc = Math.round((Math.random() - 0.5) * 20);
+    chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false,
+        height: '81%',
+        // width: '60%'
+    },
 
-//         let newVal = point.y + inc;
-//         if (newVal < 0 || newVal > 200) {
-//             newVal = point.y - inc;
-//         }
+    title: {
+        text: ''
+    },
 
-//         point.update(newVal);
-//     }
+    pane: {
+        startAngle: -90,
+        endAngle: 90,
+        background: null,
+        center: ['50%', '75%'],
+        size: '115%',
+    },
 
-// }, 3000);
+    // the value axis
+    yAxis: {
+        min: 830000,
+        max: 850000,
+        tickPixelInterval: scrnWidth > 1330 ? 300 : scrnWidth > 1155 ? 200 : scrnWidth > 945 ? 150 : 100,
+        tickPosition: 'outside',
+        tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
+        tickLength: 20,
+        tickWidth: 1,
+        minorTickInterval: null,
+        labels: {
+            distance: scrnWidth > 1330 ? 30 : 25,
+            style: {
+                fontSize: scrnWidth > 1330 ? '25px' : scrnWidth > 1155 ? '20px' : '15px'
+            }
+        },
+        lineWidth: 0,
+        plotBands: [{
+            from: 830000,
+            to: 850000,
+            color: {
+                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 0 },
+                stops: [
+                    [0.0398, '#F0D251'], // 3.98%
+                    [0.4953, '#91CF4B'], // 49.53%
+                    [0.9716, '#E97634']  // 97.16%
+                ]
+            },
+            thickness: 55
+        }]
+        // plotBands: [{
+        //     from: 5.0,
+        //     to: 6.0,
+        //     color: '#C4D56D', // green
+        //     thickness: 55
+        // }, {
+        //     from: 6.0,
+        //     to: 6.5,
+        //     color: '#F3EE60', // yellow
+        //     thickness: 55
+        // }, {
+        //     from: 6.5,
+        //     to: 7.5,
+        //     color: '#DD5855', // red
+        //     thickness: 55
+        // }]
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [6.91],
+        tooltip: {
+            valueSuffix: ''
+        },
+        dataLabels: {
+            format: '{y}',
+            borderWidth: 0,
+            color: (
+                Highcharts.defaultOptions.title &&
+                Highcharts.defaultOptions.title.style &&
+                Highcharts.defaultOptions.title.style.color
+            ) || '#333333',
+            style: {
+                fontSize: '43px',
+                fontFamily: 'Sculpin'
+            }
+        },
+        dial: {
+            radius: '80%',
+            backgroundColor: 'black',
+            baseWidth: 12,
+            baseLength: '0%',
+            rearLength: '0%'
+        },
+        pivot: {
+            backgroundColor: 'black',
+            radius: 25
+        }
+
+    }]
+
+});
