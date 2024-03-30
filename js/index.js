@@ -78,17 +78,16 @@
             data: [403750, 410000, 371500, 390000, 380000],
             backgroundColor: '#19271F',
             borderColor: '#19271F',
-            fontFamily: 'Sculpin',
             borderWidth: 1,
             barThickness: 73
         }]
     };
     const chartSaleOptions = {
-        layout: {
-            padding: {
-                left: 20 // Increase bottom padding as needed
-            }
-        },
+        // layout: {
+        //     padding: {
+        //         left: 30
+        //     },
+        // },
         scales: {
             y: {
                 min: 240000,
@@ -100,7 +99,7 @@
                     },
                     // color: 'tarnsparent',
                     font: {
-                        family: 'Sculpin',
+                        // family: 'Sculpin',
                         // size: 8
                     },
                 },
@@ -141,7 +140,7 @@
                     family: 'Sculpin',
                 }
             }
-        }
+        },
     };
     const ctxSale = document.getElementById('medianSalePriceChart').getContext('2d');
     const medianSalePriceChart = new Chart(ctxSale, {
