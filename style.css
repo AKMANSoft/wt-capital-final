@@ -329,7 +329,7 @@ body {
 .section-3 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4px;
+    gap: 4px;
     margin-top: -255px;
     z-index: 1;
 }
@@ -408,7 +408,7 @@ ul li {
 .section-12 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4px;
+    gap: 4px;
     z-index: 1;
 }
 .section-8 .img-wraper .grid-item, 
@@ -462,7 +462,7 @@ ul li {
 .section-14 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 4px;
+    gap: 4px;
     z-index: 1;
 }
 
