@@ -93,11 +93,11 @@
                     callback: function(value, index, values) {
                         return value.toLocaleString();
                     },
-                    color: 'tarnsparent',
-                    font: {
-                        family: 'Sculpin',
-                        // size: 8
-                    },
+                    // color: 'tarnsparent',
+                    // font: {
+                    //     family: 'Sculpin',
+                    //     // size: 8
+                    // },
                 },
                 grid: {
                     display: true, 
