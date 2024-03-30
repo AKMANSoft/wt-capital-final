@@ -285,12 +285,19 @@ body {
 }
 
 /* SECTION 2 STYLING */
+.section-2{
+    height: 738px;
+}
 .section-2 .icons-wraper .icons-img{
     width: 40px;
     height: 40px;
 }
 .section-2 .icons-wraper p{
     max-width: 213px;
+}
+
+.summary-para{
+    font-size: 1rem;
 }
 
 .item1 { grid-area: header1; }
@@ -360,6 +367,7 @@ body {
 
 .property-info-table td{
     height: 60px;
+    min-width: 95px;
     padding-right: 20px;
     border-bottom: 1px solid rgba(2, 3, 2, 0.10);
     text-align: left;
@@ -419,7 +427,7 @@ ul li {
     aspect-ratio: 1.16;
 }
 
-.section-8,.section-9, .section-10, .section-12 {
+.section-8,.section-9, .section-10, .section-11, .section-12 {
     height: 1684px;
 }
 
@@ -433,6 +441,10 @@ ul li {
     width: 40px;
     height: 40px;
 }
+
+/* .council-list{
+    font-size: 1.12vw;
+} */
 
 /* SECTION-13 STYLING */
 .section-13{
@@ -523,4 +535,12 @@ ul li {
 }
 .highcharts-credits, .highcharts-exporting-group{
     display: none;
+}
+
+
+@media only screen and (max-width: 768px){
+    .summary-para{
+        font-size: .5rem;
+        line-height: 22px;
+    }
 }
