@@ -84,6 +84,11 @@
         }]
     };
     const chartSaleOptions = {
+        layout: {
+            padding: {
+                left: 20 // Increase bottom padding as needed
+            }
+        },
         scales: {
             y: {
                 min: 240000,
@@ -94,10 +99,10 @@
                         return value.toLocaleString();
                     },
                     // color: 'tarnsparent',
-                    // font: {
-                    //     family: 'Sculpin',
-                    //     // size: 8
-                    // },
+                    font: {
+                        family: 'Sculpin',
+                        // size: 8
+                    },
                 },
                 grid: {
                     display: true, 
