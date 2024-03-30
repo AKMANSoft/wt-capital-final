@@ -61,6 +61,9 @@ body {
 .text-24 {
     font-size: 24px;
 }
+.text-25 {
+    font-size: 25px;
+}
 .text-50 {
     font-size: 50px;
 }
@@ -222,6 +225,9 @@ body {
 .gap-40{
     gap: 40px;
 }
+.relative{
+    position: relative;
+}
 
 /* TEXT TRANSFORM CLASSES */
 .uppercase{
@@ -301,7 +307,7 @@ body {
     'footer1 footer1 footer1 footer2 footer2 footer2 footer3';
     row-gap: 39px;
   margin-top: 70px;
-  padding: 10px;
+  /* padding: 10px; */
   padding-top: 0px;
 }
 
@@ -311,6 +317,11 @@ body {
     height: 600px;
     z-index: 0;
 }
+.options-wraper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
 .arrow-up-right{
     width: 16px;
     height: 16px;
@@ -318,7 +329,7 @@ body {
 .section-3 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+    column-gap: 4px;
     margin-top: -255px;
     z-index: 1;
 }
@@ -337,7 +348,6 @@ body {
 
 /* SECTION 4 STYLING */
 .property-info-table {
-    font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     border: 1px solid rgba(2, 3, 2, 0.10);
@@ -352,16 +362,22 @@ body {
     height: 60px;
     padding-right: 20px;
     border-bottom: 1px solid rgba(2, 3, 2, 0.10);
+    text-align: left;
 }
 
 .property-info-table th {
-    padding: 20px;
     text-align: left;
     background-color: var(--bg-green);
     color: white;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 400;
+}
+.property-info-table th:first-child {
+    padding-left: 20px;
+}
+.property-info-table th:last-child{
+    padding-right: 20px;
 }
 .maps-wraper{
     display: grid;
@@ -392,7 +408,7 @@ ul li {
 .section-12 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+    column-gap: 4px;
     z-index: 1;
 }
 .section-8 .img-wraper .grid-item, 
@@ -446,8 +462,16 @@ ul li {
 .section-14 .img-wraper{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
+    column-gap: 4px;
     z-index: 1;
+}
+
+.page-number{
+    position: absolute;
+    right: 40px;
+    bottom: 37px;
+    width: 8px;
+    height: 20px;
 }
 
 .guage-chart-main{
@@ -456,10 +480,10 @@ ul li {
 }
 
 
-.highcharts-figure #container, .highcharts-figure #container2{
-   /* height: 665px; */
+/* .highcharts-figure #container, .highcharts-figure #container2{
+   height: 665px;
    aspect-ratio: 1.35;
-}
+} */
 .highcharts-figure{
     width: 116%;
     margin-left: -8%;

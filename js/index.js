@@ -1,6 +1,6 @@
 // MEDIA RENTAL BAR CHART
     const chartRentalData = {
-        labels: ['Mar 19 - 20', 'Apr 19 - 20', 'May 19 - 20', 'Jun 19 - 20', 'Jul 19 - 20'],
+        labels: ['Mar 19 - Feb 20', 'Mar 20 - Feb 21', 'Mar 21 - Feb 22', 'Mar 22 - Feb 23', 'Mar 23 - Feb 24'],
         datasets: [{
             label: 'Median Sale Price',
             data: [450, 351, 330, 435, 500],
@@ -10,7 +10,6 @@
             barThickness: 73
         }]
     };
-
     const chartRentalOptions = {
         scales: {
             y: {
@@ -22,6 +21,7 @@
                         return value.toLocaleString();
                     },
                     // color: 'black',
+                    
                 },
                 grid: {
                     display: true, 
@@ -32,6 +32,11 @@
                 grid: {
                     display: false, 
                     drawBorder: false 
+                },
+                ticks: {
+                    font: {
+                        family: 'Sculpin',
+                    }
                 }
             }
         },
@@ -48,11 +53,13 @@
                 color: 'white',
                 formatter: function(value, context) {
                     return '$' + value.toLocaleString();
+                },
+                font: {
+                    family: 'Sculpin',
                 }
             }
         }
     };
-
     const ctxRental = document.getElementById('medianRentalPriceChart').getContext('2d');
     const medianRentalPriceChart = new Chart(ctxRental, {
         type: 'bar',
@@ -65,17 +72,17 @@
 
 // MEDIA SALE BAR CHART
     const chartSaleData = {
-        labels: ['Mar 19 - 20', 'Apr 19 - 20', 'May 19 - 20', 'Jun 19 - 20', 'Jul 19 - 20'],
+        labels: ['Mar 19 - Feb 20', 'Mar 20 - Feb 21', 'Mar 21 - Feb 22', 'Mar 22 - Feb 23', 'Mar 23 - Feb 24'],
         datasets: [{
             label: 'Median Sale Price',
             data: [403750, 410000, 371500, 390000, 380000],
             backgroundColor: '#19271F',
             borderColor: '#19271F',
+            fontFamily: 'Sculpin',
             borderWidth: 1,
             barThickness: 73
         }]
     };
-
     const chartSaleOptions = {
         scales: {
             y: {
@@ -86,7 +93,11 @@
                     callback: function(value, index, values) {
                         return value.toLocaleString();
                     },
-                    color: 'tarnsparent'
+                    color: 'tarnsparent',
+                    font: {
+                        family: 'Sculpin',
+                        // size: 8
+                    },
                 },
                 grid: {
                     display: true, 
@@ -97,7 +108,14 @@
                 grid: {
                     display: false, 
                     drawBorder: false 
+                },
+                ticks: {
+                    font: {
+                        family: 'Sculpin',
+                        size: 12
+                    }
                 }
+    
             }
         },
         plugins: {
@@ -113,11 +131,13 @@
                 color: 'white',
                 formatter: function(value, context) {
                     return '$' + value.toLocaleString();
+                },
+                font: {
+                    family: 'Sculpin',
                 }
             }
         }
     };
-
     const ctxSale = document.getElementById('medianSalePriceChart').getContext('2d');
     const medianSalePriceChart = new Chart(ctxSale, {
         type: 'bar',
@@ -141,7 +161,6 @@ const chartSupplyData = {
     }]
 };
 const referenceValue = 300;
-
 const chartSupplyOptions = {
     scales: {
         y: {
@@ -163,6 +182,11 @@ const chartSupplyOptions = {
             grid: {
                 display: false, 
                 drawBorder: false 
+            },
+            ticks: {
+                font: {
+                    family: 'Sculpin',
+                }
             }
         }
     },
@@ -190,6 +214,9 @@ const chartSupplyOptions = {
                 const diff = (context.dataset.data[context.dataIndex] - referenceValue) / referenceValue * 100;
                 return diff >= 0 ? '#3FBE12' : '#DD5855';
             },
+            font: {
+                family: 'Sculpin',
+            }
         },
         labels: {
             title: {
@@ -222,7 +249,6 @@ const chartDemandData = {
         barThickness: 40
     }]
 };
-
 const chartDemandOptions = {
     scales: {
         y: {
@@ -244,6 +270,11 @@ const chartDemandOptions = {
             grid: {
                 display: false,
                 drawBorder: false
+            },
+            ticks: {
+                font: {
+                    family: 'Sculpin',
+                }
             }
         }
     },
@@ -273,6 +304,9 @@ const chartDemandOptions = {
                 const diff = (context.dataset.data[context.dataIndex] - 3000) / 3000 * 100;
                 return diff >= 0 ? '#3FBE12' : '#DD5855';
             },
+            font: {
+                family: 'Sculpin',
+            }
         },
         labels: {
             title: {
@@ -283,7 +317,6 @@ const chartDemandOptions = {
         }
     }
 };
-
 const ctxDemand = document.getElementById('demandChart').getContext('2d');
 const medianDemandPriceChart = new Chart(ctxDemand, {
     type: 'bar',
@@ -303,10 +336,12 @@ Highcharts.chart('container', {
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: '81%',
+        height: scrnWidth > 1024 ? '67%' : '81%',
         marginLeft: 50,
+        fontFamily: 'Sculpin',
         marginRight: 50,
-        marginBottom: scrnWidth > 1200 ? 0 : 50
+        marginTop: scrnWidth > 1200 ? -80 : scrnWidth > 1024 ? -50 : 0,
+        marginBottom: scrnWidth > 1200 ? 0 : scrnWidth > 1024 ? -50 : 50
     },
 
     title: {
@@ -335,7 +370,8 @@ Highcharts.chart('container', {
         labels: {
             distance: scrnWidth > 1330 ? 30 : 25,
             style: {
-                fontSize: scrnWidth > 1330 ? '25px' : '20px'
+                fontSize: scrnWidth > 1330 ? '25px' : '20px',
+                fontFamily: 'Sculpin',
             }
         },
         lineWidth: 0,
@@ -405,10 +441,12 @@ Highcharts.chart('container2', {
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: '81%',
+        height: scrnWidth > 1024 ? '67%' : '81%',
         marginLeft: 50,
+        fontFamily: 'Sculpin',
         marginRight: 50,
-        marginBottom: scrnWidth > 1200 ? 0 : 50
+        marginTop: scrnWidth > 1200 ? -80 : scrnWidth > 1024 ? -50 : 0,
+        marginBottom: scrnWidth > 1200 ? 0 : scrnWidth > 1024 ? -50 : 50
     },
 
     title: {
@@ -441,7 +479,8 @@ Highcharts.chart('container2', {
                 return this.value.toLocaleString(); 
             },
             style: {
-                fontSize: '25px'
+                fontSize: '25px',
+                fontFamily: 'Sculpin',
             }
         },
         lineWidth: 0,
