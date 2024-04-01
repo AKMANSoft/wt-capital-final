@@ -68,6 +68,19 @@
         plugins: [ChartDataLabels]
     });
 
+    function beforePrintHandler () {
+        for (let id in Chart.instances) {
+            Chart.instances[id].resize();
+        }
+    }
+
+    window.addEventListener('beforeprint', () => {
+        myChart.resize(600, 600);
+      });
+      window.addEventListener('afterprint', () => {
+        myChart.resize();
+      });
+
 
 
 // MEDIA SALE BAR CHART
@@ -446,6 +459,15 @@ Highcharts.chart('container2', {
         plotBorderWidth: 0,
         plotShadow: false,
         height: scrnWidth > 1024 ? '67%' : '81%',
+        events: {
+            beforePrint: function() {
+            this.setSize("80%", "50%");
+            },
+            afterPrint: function() {
+            this.setSize('100%', '81%',false);
+            this.redraw();
+            }
+        },
         marginLeft: 50,
         fontFamily: 'Sculpin',
         marginRight: 50,
@@ -542,4 +564,69 @@ Highcharts.chart('container2', {
 
     }]
 
+});
+
+
+
+// ON PRINTING OUT PDF MAKING THE IMAGE BEFORE PRINT AND AFTER PRINT REVERT TO ORIGINAL CHART
+window.onbeforeprint = (ev) => {
+    for (var id in Chart.instances) {
+        let instance = Chart.instances[id];
+        let b64 = instance.toBase64Image();
+        let i = new Image();
+
+        i.style.maxWidth = "80vw";
+        i.src = b64;
+        let parent = instance.canvas.parentNode;
+        instance.tempImage = i;
+        instance.oldDisplay = instance.canvas.style.display;
+        instance.canvas.style.display = "none";
+        parent.appendChild(i);
+    }
+};
+window.onafterprint = (ev) => {
+    for (var id in Chart.instances) {
+        let instance = Chart.instances[id];
+        if (instance.tempImage) {
+            let parent = instance.canvas.parentNode;
+            parent.removeChild(instance.tempImage);
+            instance.canvas.style.display = instance.oldDisplay;
+            delete instance.oldDisplay;
+            delete instance.tempImage;
+        }
+    }
+};
+
+// ON PRINTING OUT PDF MAKING THE HIGHLIGHT CHARTS RESPONSIVE
+document.addEventListener("DOMContentLoaded", function() {
+    Highcharts.setOptions({ // Apply to all charts
+        chart: {
+            events: {
+                beforePrint: function () {
+                    this.oldhasUserSize = this.hasUserSize;
+                    this.resetParams = [this.chartWidth, this.chartHeight, false];
+                    this.setSize('100%', '67%', false);
+                },
+                afterPrint: function () {
+                    this.setSize.apply(this, this.resetParams);
+                    this.hasUserSize = this.oldhasUserSize;
+                }
+            }
+        }
+    });
+
+    var printUpdate = function () {
+        Highcharts.charts.forEach(function(chart) {
+            if (chart) {
+                chart.reflow();
+            }
+        });
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function (mql) {
+            printUpdate();
+        });
+    }
 });
