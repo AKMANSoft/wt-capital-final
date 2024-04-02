@@ -220,11 +220,9 @@ const chartSupplyOptions = {
             formatter: function(value, context) {
                 let diff = (value - referenceValue) / referenceValue * 100;
                 diff = parseFloat(diff.toFixed(2));
-                console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
                 const color = diff >= 0 ? '#3FBE12' : '#DD5855';
                 col = color
-                console.log("color is ", color)
                 return prefix + diff + '%';
             },
             color: function(context) {
@@ -308,10 +306,8 @@ const chartDemandOptions = {
             formatter: function(value, context) {
                 let diff = (value - 3000) / 3000 * 100;
                 diff = parseFloat(diff.toFixed(2));
-                console.log("diff = " + typeof(diff));
                 const prefix = diff >= 0 ? "+" : "";
                 const color = diff >= 0 ? '#3FBE12' : '#DD5855';
-                console.log("color is ", color)
                 // context.dataset.datalabels. = color;
                 // context.ChartDataLabels.backgroundColor = color
                 return prefix + diff + '%';
@@ -344,7 +340,14 @@ const medianDemandPriceChart = new Chart(ctxDemand, {
 
 
 // GUAGE CHARTS
-const scrnWidth = window.innerWidth
+let scrnWidth = window.innerWidth;
+
+function updateScreenWidth() {
+    scrnWidth = window.innerWidth;
+}
+
+window.addEventListener('resize', updateScreenWidth);
+console.log("scrnWidth " ,scrnWidth)
 Highcharts.chart('container', {
 
     chart: {
@@ -353,7 +356,7 @@ Highcharts.chart('container', {
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: scrnWidth > 1024 ? '55%' : '81%',
+        height: scrnWidth >= 1750 ? '43%' : scrnWidth >= 1500 ? '52%' : scrnWidth >= 1280 ? '55%' : scrnWidth >= 1024 ? '60%' : '80%',
         marginLeft: 50,
         fontFamily: 'Sculpin',
         marginRight: 50,
@@ -451,26 +454,29 @@ Highcharts.chart('container', {
 });
 
 Highcharts.chart('container2', {
+
     chart: {
         type: 'gauge',
         plotBackgroundColor: null,
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: scrnWidth > 1024 ? '55%' : '81%',
-        events: {
-            beforePrint: function() {
-            this.setSize("80%", "50%");
-            },
-            afterPrint: function() {
-            this.setSize('100%', '81%',false);
-            this.redraw();
-            }
-        },
+        height: scrnWidth >= 1750 ? '43%' : scrnWidth >= 1500 ? '52%' : scrnWidth >= 1280 ? '55%' : scrnWidth >= 1024 ? '60%' : '80%',
+        // height: scrnWidth >= 1500 ? '50%' : scrnWidth >= 1280 ? '55%' : scrnWidth >= 1024 ? '60%' : '80%',
+        // events: {
+        //     beforePrint: function() {
+        //         window.location.reload()
+        //     this.setSize("80%", "60%");
+        //     },
+        //     afterPrint: function() {
+        //     this.setSize('80%', '60%',false);
+        //     this.redraw();
+        //     }
+        // },
         marginLeft: 50,
         fontFamily: 'Sculpin',
         marginRight: 50,
-        marginTop: scrnWidth > 1200 ? -80 : scrnWidth > 1024 ? -50 : 0,
+        marginTop: scrnWidth > 1200 ? -50 : scrnWidth > 1024 ? -50 : 0,
         marginBottom: scrnWidth > 1200 ? 0 : scrnWidth > 1024 ? -50 : 50
     },
 
@@ -598,13 +604,25 @@ window.onafterprint = (ev) => {
 
 // ON PRINTING OUT PDF MAKING THE HIGHLIGHT CHARTS RESPONSIVE
 document.addEventListener("DOMContentLoaded", function() {
+    // if(scrnWidth >= 1500){
+    //     document.getElementById("container").style.height = '620px'
+    //     document.getElementById("container2").style.height = '620px'
+    // }
+    // if(scrnWidth < 1500 && scrnWidth > 1280){
+    //     document.getElementById("container").style.height = '570px'
+    //     document.getElementById("container2").style.height = '570px'
+    // }
+    // if(scrnWidth < 1280){
+    //     document.getElementById("container").style.height = '550px'
+    //     document.getElementById("container2").style.height = '550px'
+    // }
     Highcharts.setOptions({ // Apply to all charts
         chart: {
             events: {
                 beforePrint: function () {
                     this.oldhasUserSize = this.hasUserSize;
                     this.resetParams = [this.chartWidth, this.chartHeight, false];
-                    this.setSize('100%', '67%', false);
+                    this.setSize('80%', '80%', false);
                 },
                 afterPrint: function () {
                     this.setSize.apply(this, this.resetParams);
@@ -629,3 +647,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+window.onresize = function(event) {
+    if(scrnWidth >= 1500){
+        document.getElementById("container").style.height = '620px'
+        document.getElementById("container2").style.height = '620px'
+    }
+    if(scrnWidth < 1500 && scrnWidth > 1280){
+        document.getElementById("container").style.height = '570px'
+        document.getElementById("container2").style.height = '570px'
+    }
+    if(scrnWidth < 1280){
+        document.getElementById("container").style.height = '550px'
+        document.getElementById("container2").style.height = '550px'
+    }
+};

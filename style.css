@@ -555,10 +555,10 @@ ul li {
 }
 
 
-/* .highcharts-figure #container, .highcharts-figure #container2{
-   height: 665px;
-   aspect-ratio: 1.35;
-} */
+.highcharts-figure #container, .highcharts-figure #container2{
+   height: 620px;
+   /* aspect-ratio: 1.35; */
+}
 .highcharts-figure{
     width: 116%;
     margin-left: -8%;
