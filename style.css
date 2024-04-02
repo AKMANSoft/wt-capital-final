@@ -92,7 +92,13 @@ body {
 .text-25 {
     font-size: 25px;
 }
+.text-30{
+    font-size: 30px;
+}
 .text-50 {
+    font-size: 50px;
+}
+.text-54 {
     font-size: 50px;
 }
 
@@ -197,6 +203,12 @@ body {
 .mt-100{
     margin-top: 100px;
 }
+.mt-108{
+    margin-top: 108px;
+}
+.mt-202{
+    margin-top: 202px;
+}
 
 /* LINE HEIGHT CLASSES */
 .leading-20{
@@ -289,10 +301,41 @@ body {
 }
 
 
-/* SECTION 1 STYLING */
-.section-1{
-    height: 840px;
+@media print {
+    @page {
+      size: A4; /* You can change 'A4' to other predefined sizes like 'letter' or specify custom sizes */
+      margin: 0; /* Set margin to 0 for full bleed */
+    }
+  
+    body {
+      width: 100%; /* Make sure content takes up full width */
+      height: 100%; /* Make sure content takes up full height */
+      margin: 0; /* Ensure no margin */
+      padding: 0; /* Ensure no padding */
+    }
+  }
+
+.section-1, 
+.section-2,
+.section-3,
+.section-4,
+.section-5,
+.section-6,
+.section-7,
+.section-8,
+.section-9,
+.section-10,
+.section-11,
+.section-12,
+.section-13,
+.section-14,
+.section-15,
+.section-16{
+    height: 1684px;
 }
+
+
+/* SECTION 1 STYLING */
 .header-1{
     display: flex;
     justify-content: space-between;
@@ -309,19 +352,16 @@ body {
     width: 95%;
     height: 1px;
     background: linear-gradient(90deg, rgba(240, 232, 48, 0.00) 0%, #F0E830 70.39%, rgba(240, 232, 48, 0.00) 100%);
-    margin-top: 414px;
+    margin-top: 843px;
 }
 
 /* SECTION 2 STYLING */
-/* .section-2{
-    height: 738px;eeeeeeeeeeeeeeeeeeee
-} */
 .section-2 .icons-wraper .icons-img{
     width: 40px;
     height: 40px;
 }
 .section-2 .icons-wraper p{
-    max-width: 213px;
+    max-width: 356px;
 }
 
 .summary-para{
@@ -330,16 +370,17 @@ body {
 
 .item1 { grid-area: header1; }
 .item2 { grid-area: header2; }
-.item3 { grid-area: header3; }
-.item4 { grid-area: footer1; }
-.item5 { grid-area: footer2; }
-.item6 { grid-area: footer3; }
+.item3 { grid-area: middle1; }
+.item4 { grid-area: middle2; }
+.item5 { grid-area: footer1; }
+.item6 { grid-area: footer2; }
 
 .section-2 .icons-wraper {
   display: grid;
   grid-template-areas:
-    'header1 header1 header1 header2 header2 header2 header3'
-    'footer1 footer1 footer1 footer2 footer2 footer2 footer3';
+    'header1 header1 header2'
+    'middle1 middle1 middle2'
+    'footer1 footer1 footer2';
     row-gap: 39px;
   margin-top: 70px;
   /* padding: 10px; */
@@ -423,9 +464,6 @@ body {
 
 
 /* SECTION 5 STYLING */
-.section-5, .section-6, .section-7{
-    height: 1684px;
-}
 li::marker {
     font-size: 1.7rem;
 }
@@ -475,9 +513,6 @@ ul li {
 } */
 
 /* SECTION-13 STYLING */
-.section-13{
-    height: 1684px;
-}
 .section-13 .top{
     height: 868px;
 }

@@ -353,7 +353,7 @@ Highcharts.chart('container', {
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: scrnWidth > 1024 ? '67%' : '81%',
+        height: scrnWidth > 1024 ? '55%' : '81%',
         marginLeft: 50,
         fontFamily: 'Sculpin',
         marginRight: 50,
@@ -451,14 +451,13 @@ Highcharts.chart('container', {
 });
 
 Highcharts.chart('container2', {
-
     chart: {
         type: 'gauge',
         plotBackgroundColor: null,
         plotBackgroundImage: null,
         plotBorderWidth: 0,
         plotShadow: false,
-        height: scrnWidth > 1024 ? '67%' : '81%',
+        height: scrnWidth > 1024 ? '55%' : '81%',
         events: {
             beforePrint: function() {
             this.setSize("80%", "50%");
